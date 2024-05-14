@@ -11,7 +11,8 @@
 </h1>
 <form method="post" action="/todo/update">
   <button type="submit">작성</button></form>
-<button type="submit">삭제</button>
+<form method="post" action="/todo/delete">
+  <button type="submit">삭제</button></form>
 <br/>
 
 </body>
