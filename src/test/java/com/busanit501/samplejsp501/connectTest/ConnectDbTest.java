@@ -1,21 +1,70 @@
 package com.busanit501.samplejsp501.connectTest;
 
+import com.todo.domain.TodoVO;
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.time.LocalDate;
 
 public class ConnectDbTest {
+
     @Test
-    public void test(){
-        int v1=100;
-        int v2=100;
-        Assertions.assertEquals(v1,v2);
+    public void teslHikariCP() throws Exception{
+        HikariConfig config= new HikariConfig();
+        config.setDriverClassName("org.mariadb.jdbc.Driver");
+        config.setJdbcUrl("jdbc:mariadb://localhost:3306/webdb");
+        config.setUsername("webuser");
+        config.setPassword("webuser");
+
+        config.addDataSourceProperty("cachePrepStmts", "true");
+        config.addDataSourceProperty("prepStmtCacheSize", "250");
+        config.addDataSourceProperty("prepStmtCacheSqlLimit", "2048");
+
+        HikariDataSource dataSource = new HikariDataSource(config);
+        Connection conn = dataSource.getConnection();
+
+        System.out.println(conn);
+        conn.close();
+
 
     }
+
+
     @Test
-    public void connectTestDb()throws Exception{
+    public void test2() {
+        //원래 우리가 인스턴스 생성 방법
+        //TodoVO Todo = new TodoVO();
+        TodoVO todoVO = new TodoVO();
+        todoVO.setTno(200L);
+        todoVO.setTitle("제목200");
+        todoVO.setDueDate(LocalDate.now());
+
+        System.out.println(todoVO);
+
+        TodoVO todo = TodoVO.builder()
+                .tno(100L)
+                .title("제목100")
+                .dueDate(LocalDate.now())
+                .build();
+
+        System.out.println(todo);
+    }
+
+    @Test
+    public void test() {
+        int v1 = 100;
+        int v2 = 100;
+        // 단순 비교 확인.
+        Assertions.assertEquals(v1, v2);
+
+    }
+
+    @Test
+    public void connectTestDb() throws Exception {
         // 예외를 처리하는 방법2가지,
         // 1) try catch finally 구문 이용.
         // 2) throws 를 키워드를 이용해서, 해당 예외를 떠넘기기.
@@ -38,3 +87,10 @@ public class ConnectDbTest {
         conn.close();
     }
 }
+
+
+
+
+
+
+
