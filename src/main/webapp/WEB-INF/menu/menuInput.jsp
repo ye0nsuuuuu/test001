@@ -13,10 +13,18 @@
 <body>
 <h1><%= "임시 MenuInput 화면." %>
 </h1>
-<form method="post" action="/menu/input ">
-    <input type="text" name="menu1" placeholder="메뉴1 입력해주세요">
-    <input type="text" name="menu2" placeholder="메뉴2 입력해주세요">
-    <button type="submit">임시 menu 등록</button>
+<form method="post" action="/menu/input">
+
+    <div>
+        <input type="text" name="MenuTitle" placeholder="메뉴를 입력해주세요">
+    </div>
+    <div>
+        <input type="date" name="dueDate">
+    </div>
+    <div>
+        <button type="reset">초기화</button>
+        <button type="submit">작성</button>
+    </div>
 </form>
 </body>
 </html>
